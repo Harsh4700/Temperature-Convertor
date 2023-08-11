@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Temperature Converter</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    color: white;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  #container {
+    text-align: center;
+  }
+  input[type="number"] {
+    width: 100px;
+    padding: 5px;
+  }
+  select {
+    padding: 5px;
+  }
+  button {
+    padding: 5px 10px;
+  }
+</style>
+</head>
+<body>
+<div id="container">
+  <h1>Temperature Converter</h1>
+  <input type="number" id="temperatureInput" placeholder="Enter temperature">
+  <select id="unitSelect">
+    <option value="celsius">Celsius</option>
+    <option value="fahrenheit">Fahrenheit</option>
+    <option value="kelvin">Kelvin</option>
+  </select>
+  <button id="convertButton">Convert</button>
+  <p id="result"></p>
+</div>
+<script>
+  document.getElementById("convertButton").addEventListener("click", function() {
+    const temperatureInput = parseFloat(document.getElementById("temperatureInput").value);
+    const unitSelect = document.getElementById("unitSelect").value;
+    const resultElement = document.getElementById("result");
+
+    if (isNaN(temperatureInput)) {
+      resultElement.textContent = "Please enter a valid number.";
+      return;
+    }
+
+    let convertedTemperature;
+    let convertedUnit;
+
+    if (unitSelect === "celsius") {
+      convertedTemperature = (temperatureInput - 32) * (5 / 9);
+      convertedUnit = "Celsius";
+    } else if (unitSelect === "fahrenheit") {
+      convertedTemperature = (temperatureInput * 9 / 5) + 32;
+      convertedUnit = "Fahrenheit";
+    } else if (unitSelect === "kelvin") {
+      convertedTemperature = temperatureInput + 273.15;
+      convertedUnit = "Kelvin";
+    }
+
+    resultElement.textContent = `Converted Temperature: ${convertedTemperature.toFixed(2)} ${convertedUnit}`;
+  });
+</script>
+</body>
+</html>
